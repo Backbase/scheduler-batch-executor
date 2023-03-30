@@ -1,6 +1,14 @@
 # scheduler-batch-executor
 
-_Fill out this file with some information about your Service._
+- This service is used Listen the batch request from the activeMQ. Requests are produced to activeMQ via payment-batch-integration-outbound-service if the batch type is ACH.
+	-	Once it listens the batch reqest, calculate the nexte execution date and  warehouse the batch request via schedule-batch-service.
+	-	If the next execution date is todays date, then submit the request back to payment-batch-integration-outbound-service to submit it to Core like CGI.
+	    This service recieve the response back from payment-batch-integration-outbound-service and update the status to  scheduler ware house table and also OOTB table.
+ 	- This service also have an API to display the Batch-order history client-api/v1/scheduled-batch-orders/history based on the query paramenter like executiondaterange, status, etc.
+
+ 	- This service also handles the REcurring batch payments. Next exeuction date of recurring payment is handled at this service.
+
+
 
 #Getting Started
 * [Extend and build](https://community.backbase.com/documentation/ServiceSDK/latest/extend_and_build)
