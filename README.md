@@ -6,7 +6,9 @@
 	    This service recieve the response back from payment-batch-integration-outbound-service and update the status to  scheduler ware house table and also OOTB table.
  	- This service also have an API to display the Batch-order history client-api/v1/scheduled-batch-orders/history based on the query paramenter like executiondaterange, status, etc.
 
- 	- This service also handles the REcurring batch payments. Next exeuction date of recurring payment is handled at this service.
+ 	- This service also handles the Recurring batch payments. Next exeuction date of recurring payment is handled at this service.
+ - This service also has the scheduler to run every 30 minutes on a week days morning 6am to 3pm.
+ 	- This scheduler handles the limit check, account balance check and user active check, before it submit the batches to core via payment-batch-integration-outbound-service.
 
 
 
