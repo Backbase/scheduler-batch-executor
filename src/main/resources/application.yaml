@@ -1,0 +1,73 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    com.backbase: INFO
+
+spring:
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    user: admin
+    password: admin
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+
+# API Registry client configuration
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: false
+    appname: ${spring.application.name}
+    healthCheckUrlPath: /actuator/health
+    statusPageUrlPath: /actuator/info
+    nonSecurePort: ${server.port}
+    metadata-map:
+      public: true
+      role: live
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+# Configure Internal JWT handler
+sso:
+  jwt:
+    internal:
+      signature:
+        key:
+          type: ENV
+          value: SIG_SECRET_KEY
+
+# Spring health monitoring
+management:
+  health:
+    jms:
+     enabled: false
+
+scheduled-batch:
+  cron-expression: "0-1 */30 6-16 *  * MON-FRI"   # Executes every 30 minutes
+  maxFailureCountPerSchedule: 10
+  limit-checks-enabled: true
+  balance-check-enabled: true
+  created-user-valid-check-enabled: true
+  pageSize: 100
+  cutOffTime: "16:00"
+  achBatchQueueName: vbtx-batch-ach
+  batchOrderExecutorFixedRate: 40000
+  achBatchDebitTypes: ACH_DEBIT_MANUAL,ACH_DEBIT
+  achBatchCreditTypes: ACH_CREDIT_MANUAL,ACH_CREDIT
+  achBatchDebitMinusBusinessDays: 1
+  achBatchCreditMinusBusinessDays: 2
+  enableCache: true
+  # clear the cache every day at midnight
+  clearAllCache: 0 0 0 * * ?
+  execution-date-validation:
+    restricted-dates-resolution-strategy: PROPERTIES_BASED # Choice between PROPERTIES_BASED (default) or EXTERNAL
+    weekend-execution-strategy: RESCHEDULE # Choice between RESCHEDULE or ALLOW
+    restricted-dates: 2022-11-24, 2022-12-25
+
+idempotencyConfiguration:
+  cacheName: ${spring.application.name}Cache

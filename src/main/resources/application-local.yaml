@@ -1,0 +1,24 @@
+server:
+  port: 9776
+
+logging:
+  level:
+    com.backbase: INFO
+
+spring:
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    user: admin
+    password: admin
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+scheduled-batch:
+  cron-expression: "*/20 * * *  * *" # Runds every 20 sec
+  #"0-1 */1 0-23 *  * MON-FRI" # Every minute, between 06:00 AM and 09:59 PM, Monday through Frida
+  #0 */2 6-21 *  * MON-FRI
+  pageSize: 2
+
+

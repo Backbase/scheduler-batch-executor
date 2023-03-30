@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: scheduled-batch-payment-executor
