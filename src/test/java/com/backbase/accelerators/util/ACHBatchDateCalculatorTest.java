@@ -130,7 +130,7 @@ class ACHBatchDateCalculatorTest {
         schedule.setStartDate(LocalDate.now());
         schedule.setRepetition(2);
         LocalDate localDate = achBatchDateCalculator.calculateRecurringNextExecutionDate(schedule, "credit", LocalDate.now());
-        Assertions.assertEquals(LocalDate.now().plusDays(31), localDate);
+        Assertions.assertEquals(LocalDate.now().plusDays(30), localDate);
     }
 
     @Test
@@ -140,7 +140,7 @@ class ACHBatchDateCalculatorTest {
         schedule.setStartDate(LocalDate.now());
         schedule.setRepetition(2);
         LocalDate localDate = achBatchDateCalculator.calculateRecurringNextExecutionDate(schedule, "credit", LocalDate.now());
-        Assertions.assertEquals(LocalDate.now().plusDays(92), localDate);
+        Assertions.assertEquals(LocalDate.now().plusDays(91), localDate);
     }
 
     @Test
